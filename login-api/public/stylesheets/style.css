@@ -1,0 +1,101 @@
+/* messages animation */
+
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 400;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco";
+    font-size: 20px;
+}
+
+.show-hide-message.ng-hide-remove {
+    animation: zoomIn 0.3s both ease;
+}
+
+.navbar {
+    border-bottom: 4px solid cadetblue;
+}
+
+.errorwindow {
+    position: fixed;
+    top: 0;
+    width: 50%;
+    left: 25%;
+    box-shadow: 5px 5px 50px #bce;
+}
+
+.errorwindow .header {
+    background-color: white;
+    height: 30px;
+    font-size: 25px;
+}
+
+.errorwindow .header>div {
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.errorwindow .header .fa.fa-exclamation-circle {
+    color: red;
+    padding-top: 2px;
+}
+
+.errorwindow .header .fa.fa-check-circle {
+    color: green;
+    padding-top: 2px;
+}
+
+.errorwindow .alert {
+    margin-bottom: 0;
+    border-radius: none;
+}
+
+.apploading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.apploading .backdrop {
+    width: 100%;
+    height: 100%;
+    background-color: #ececec;
+    opacity: 0.75;
+}
+
+.apploading .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+table,
+th,
+td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+table tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.sortorder:after {
+    content: '\25b2'; // BLACK UP-POINTING TRIANGLE
+}
+
+.sortorder.reverse:after {
+    content: '\25bc'; // BLACK DOWN-POINTING TRIANGLE
+}
