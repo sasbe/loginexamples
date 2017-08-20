@@ -28,9 +28,9 @@ router.use(function(req, res, next) {
     }
 });
 router.post('/authenticate', function(req, res) {
-    console.log(req.body.username);
+    console.log(req.body.employeenumber);
     User.findOne({
-        username: req.body.username
+        employeenumber: req.body.employeenumber
     }, 'username emailid password employeenumber role', function(err, user) {
         if (err) {
             return res.json({ success: false, message: err });

@@ -53,7 +53,7 @@
                 $scope.$emit("appLoading", false);
             });
             controllerScope.loginData = {
-                username: '',
+                employeenumber: '',
                 password: ''
             };
             controllerScope.doLogin = function() {
