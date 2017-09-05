@@ -8,13 +8,13 @@
             controllerScope.claimData = {
                 employeeno: 1,
                 claimno: '1',
-                claimdate: '04/08/2017',
+                claimdate: (new Date()).toISOString(),
                 claimoffice: 'new road',
                 claimname: 'Medical Bills',
                 claimamount: 12345,
                 contactnum: 123456789,
                 dischargedate: '',
-                dischargeamount: '',
+                reimbursedamount: '',
                 remarks: ''
             };
             controllerScope.addClaim = function() {

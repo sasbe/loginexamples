@@ -2,16 +2,18 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
 var claimSchema = mongoose.Schema({
-    claimno: { type: String, unique: true, required: true },
+    claimno: { type: Number, required: true },
     claimdate: { type: Date, required: true },
     claimoffice: { type: String, required: true },
     claimname: { type: String, required: true },
     claimamount: { type: Number, required: true },
     contactnum: { type: Number, required: true },
     dischargedate: { type: Date },
-    dischargeamount: { type: Number },
+    reimbursedamount: { type: Number },
     remarks: { type: String },
-    username: { type: String, required: true, lowercase: true }
+    empno: { type: Number, required: true, lowercase: true },
+    completed: { type: Boolean }
 });
+
 
 module.exports = mongoose.model("claims", claimSchema);

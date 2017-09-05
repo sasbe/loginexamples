@@ -1,63 +1,72 @@
-<div class="page-header">
-    <h2>User Registration</h2>
-</div>
+<div class="container">
+    <div class="page-header">
+        <h2>User Registration</h2>
+    </div>
 
-<form name="registerForm" ng-hide="register.appLoading" ng-submit="register.regUser()" novalidate>
-    <div class="form-group">
-        <label for="username">User name:</label>
-        <input type="text" class="form-control" name="username" placeholder="Enter user name" ng-model="register.regData.username" required>
-        <span style="color:red" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
+    <form name="registerForm" ng-hide="register.appLoading" ng-submit="register.regUser()" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="employeeno">Employee Number:</label>
+                    <input type="number" class="form-control" name="employeeno" placeholder="Enter employee number" ng-model="register.regData.employeeno" required>
+                    <span style="color:red" ng-show="registerForm.employeeno.$dirty && registerForm.employeeno.$invalid">
+                    <span ng-show="registerForm.employeeno.$error.required">employeeno is required.</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="username">User name:</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter user name" ng-model="register.regData.username" required>
+                    <span style="color:red" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
         <span ng-show="registerForm.username.$error.required">Username is required.</span>
-        </span>
-    </div>
-    <div class="form-group">
-        <label for="emailid">Email address:</label>
-        <input type="email" class="form-control" name="emailid" placeholder="Enter email" ng-model="register.regData.emailid" required>
-        <span style="color:red" ng-show="registerForm.emailid.$dirty && registerForm.emailid.$invalid">
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="emailid">Email address:</label>
+                    <input type="email" class="form-control" name="emailid" placeholder="Enter email" ng-model="register.regData.emailid" required>
+                    <span style="color:red" ng-show="registerForm.emailid.$dirty && registerForm.emailid.$invalid">
             <span ng-show="registerForm.emailid.$error.required">Email is required.</span>
-        <span ng-show="registerForm.emailid.$error.email">Invalid email address.</span>
-        </span>
-    </div>
-    <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" class="form-control" name="password" placeholder="Enter password" ng-model="register.regData.password" required>
-        <span style="color:red" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+                    <span ng-show="registerForm.emailid.$error.email">Invalid email address.</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" name="password" placeholder="Enter password" ng-model="register.regData.password" required>
+                    <span style="color:red" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
         <span ng-show="registerForm.password.$error.required">Password is required.</span>
-        </span>
-    </div>
-    <div class="form-group">
-        <label for="employeeno">Employee Number:</label>
-        <input type="number" class="form-control" name="employeeno" placeholder="Enter employee number" ng-model="register.regData.employeeno" required>
-        <span style="color:red" ng-show="registerForm.employeeno.$dirty && registerForm.employeeno.$invalid">
-            <span ng-show="registerForm.employeeno.$error.required">employeeno is required.</span>
-        </span>
-    </div>
-    <div class="form-group">
-        <label for="desgination">Desgination</label>
-        <input type="text" class="form-control" name="desgination" placeholder="Enter the desgination" ng-model="register.regData.desgination" required>
-        <span style="color:red" ng-show="registerForm.desgination.$dirty && registerForm.desgination.$invalid">
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="desgination">Desgination</label>
+                    <input type="text" class="form-control" name="desgination" placeholder="Enter the desgination" ng-model="register.regData.desgination" required>
+                    <span style="color:red" ng-show="registerForm.desgination.$dirty && registerForm.desgination.$invalid">
             <span ng-show="registerForm.desgination.$error.required">Desgination is required.</span>
-        </span>
-    </div>
-    <div class="form-group">
-        <label for="level">Level</label>
-        <select name="level" class="form-control" id="repeatSelect" ng-model="register.regData.level" required>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="level">Level</label>
+                    <select name="level" class="form-control" id="repeatSelect" ng-model="register.regData.level" required>
         <option ng-repeat="option in register.regData.availableLevels" value="{{option}}">{{option}}</option>
         </select>
-        <span style="color:red" ng-show="registerForm.level.$dirty && registerForm.level.$invalid">
+                    <span style="color:red" ng-show="registerForm.level.$dirty && registerForm.level.$invalid">
             <span ng-show="registerForm.level.$error.required">Level is required.</span>
-        </span>
-    </div>
-    <div class="form-group">
-        <label for="department">Department</label>
-        <input type="text" class="form-control" name="department" placeholder="Enter the department" ng-model="register.regData.department" required>
-        <span style="color:red" ng-show="registerForm.department.$dirty && registerForm.department.$invalid">
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <input type="text" class="form-control" name="department" placeholder="Enter the department" ng-model="register.regData.department" required>
+                    <span style="color:red" ng-show="registerForm.department.$dirty && registerForm.department.$invalid">
             <span ng-show="registerForm.emailid.$error.required">department is required.</span>
-        </span>
-    </div>
-
-    <button type="submit" class="btn btn-primary" ng-disabled="registerForm.username.$dirty && registerForm.username.$invalid ||
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-6">
+            <button type="submit" class="btn btn-primary form-group" ng-disabled="registerForm.username.$dirty && registerForm.username.$invalid ||
   registerForm.emailid.$dirty && registerForm.emailid.$invalid|| registerForm.password.$dirty && registerForm.password.$invalid || 
   registerForm.department.$dirty && registerForm.department.$invalid || registerForm.desgination.$dirty && registerForm.desgination.$invalid || 
   registerForm.level.$dirty && registerForm.level.$invalid || registerForm.employeeno.$dirty && registerForm.employeeno.$invalid">Register</button>
-</form>
+        </div>
+    </form>
+</div>

@@ -6,9 +6,19 @@
     src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }
 
+html {
+    background: linear-gradient(to bottom right, #e6eded 40%, #31667a 75%);
+    height: 100%;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "San Francisco";
     font-size: 20px;
+    background: transparent;
+}
+
+.container {
+    margin-top: 10px;
 }
 
 .show-hide-message.ng-hide-remove {
@@ -16,7 +26,10 @@ body {
 }
 
 .navbar {
-    border-bottom: 4px solid cadetblue;
+    /* border-bottom: 4px solid cadetblue; */
+    background: #FFF;
+    border-radius: 0;
+    margin-bottom: 0;
 }
 
 .errorwindow {
@@ -93,9 +106,141 @@ table tr:nth-child(even) {
 }
 
 .sortorder:after {
-    content: '\25b2'; // BLACK UP-POINTING TRIANGLE
+    content: '\25b2';
 }
 
 .sortorder.reverse:after {
-    content: '\25bc'; // BLACK DOWN-POINTING TRIANGLE
+    content: '\25bc';
+}
+
+.panel-info>.panel-heading {
+    border: none;
+    background: none;
+}
+
+.panel-info {
+    border: none;
+    border-radius: 0;
+}
+
+.panel-content table thead tr {
+    color: #31708f;
+    background: none;
+}
+
+.required:after {
+    content: '*';
+    color: red;
+}
+
+.datepicker {
+    position: relative;
+    padding: 0;
+}
+
+.datepicker .form-control[readonly] {
+    position: relative;
+    background-color: #FFF;
+}
+
+.datepicker .ndp-click-trigger {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 6px 12px;
+}
+
+nepalidatepicker[disabled="disabled"] .ndp-click-trigger {
+    display: none;
+}
+
+.filter .pagination {
+    margin: 0;
+}
+
+#filterContainer {
+    position: absolute;
+    background: linear-gradient(to bottom right, #e6eded 40%, #31667a 75%);
+}
+
+.navbar .navbar-toggle .icon-bar {
+    background: #31667a;
+}
+
+.card {
+    height: calc(50vh - 70px);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin: 0;
+}
+
+.card .card-header,
+.card .card-content,
+.card .card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: inherit;
+}
+
+.card .card-header {
+    background: #FFF;
+    height: calc(10vh - 18px);
+    border-bottom: 1px solid rgba(128, 136, 180, 0.62);
+    background: rgba(95, 158, 160, 0.46)
+}
+
+.card .card-content {
+    background: #FFF;
+    height: calc(30vh - 18px);
+    border-bottom: 1px solid rgba(128, 136, 180, 0.62);
+}
+
+.card .card-footer {
+    background: #FFF;
+    height: calc(10vh - 18px);
+    background: #fff;
+}
+
+@media all and (max-width: 768px) {
+    table td:before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+    }
+    table {
+        border: 0;
+    }
+    table thead {
+        display: none;
+    }
+    .table>tbody>tr {
+        margin-bottom: 10px;
+        display: block;
+        /* border-bottom: 2px solid #ddd; */
+    }
+    .table>tbody>tr>td {
+        display: block;
+        text-align: right;
+        font-size: 13px;
+        border: none;
+        min-height: 30px;
+    }
+    .filter>div:nth-child(1) {
+        width: 100%;
+        position: absolute;
+        margin-right: auto;
+        margin-left: auto;
+        background: #dea;
+        z-index: 100;
+        text-align: center;
+    }
+    #filterContainer {
+        width: calc(100% - 30px);
+        top: 52px;
+        bottom: 0;
+    }
 }

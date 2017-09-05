@@ -21,9 +21,9 @@
                     //emit apploading
                     $scope.$emit("appLoading", true);
                     //save the content first
-                    Claim.updateClaim(controllerScope.claimData.claimno, {
+                    Claim.updateClaim(controllerScope.claimData._id, {
                         dischargedate: !controllerScope.claimData.dischargedate ? "" : controllerScope.claimData.dischargedate,
-                        dischargeamount: !controllerScope.claimData.dischargeamount ? "" : controllerScope.claimData.dischargeamount
+                        reimbursedamount: !controllerScope.claimData.reimbursedamount ? "" : controllerScope.claimData.reimbursedamount
                     }).then(function(response) {
                         if (!response.data.success) {
                             $scope.$emit("errorReceived", response.data.message);

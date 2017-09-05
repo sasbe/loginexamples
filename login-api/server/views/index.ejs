@@ -5,19 +5,24 @@
     <title>
         <%= title %>
     </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
 
     <!-- CSS files-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="stylesheets/animate.css" />
     <link rel="stylesheet" href="stylesheets/style.css" />
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/nepali.datepicker.v2.2.min.css" />
 
     <!-- js libraries-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="javascripts/jquery.mobilejs.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <script src="javascripts/nepali.datepicker.v2.2.min.js"></script>
+    <script src="javascripts/accounting.min.js"></script>
     <!--main angular -->
+
     <script src="javascripts/angular.js"></script>
     <script src="javascripts/angular-route.js"></script>
     <script src="javascripts/angular-animate.js"></script>
@@ -28,6 +33,7 @@
     <script src="app/route.js"></script>
 
     <!-- angualr controller-->
+    <script src="app/controller/homeCtrl.js"></script>
     <script src="app/controller/userCtrl.js"></script>
     <script src="app/controller/mainCtrl.js"></script>
     <script src="app/controller/claimCtrl.js"></script>
@@ -38,6 +44,10 @@
     <script src="app/services/userServices.js"></script>
     <script src="app/services/authServices.js"></script>
     <script src="app/services/claimServices.js"></script>
+    <script src="app/services/commonServices.js"></script>
+
+    <!-- directives -->
+    <script src="app/directives/commonDirectives.js"></script>
 
 </head>
 
@@ -106,6 +116,22 @@
             <span class="sr-only ">Loading...</span>
         </div>
     </div>
+    <script>
+        accounting.settings = {
+            currency: {
+                symbol: "₹", // default currency symbol is '$'
+                format: "%s%v", // controls output: %s = symbol, %v = value/number (can be object: see below)
+                decimal: ".", // decimal point separator
+                thousand: ",", // thousands separator
+                precision: 2 // decimal places
+            },
+            number: {
+                precision: 0, // default precision on numbers is 0
+                thousand: ",",
+                decimal: "."
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -1,72 +1,61 @@
-<div class="panel panel-info">
-    <div class="panel-heading" style="text-align:center;">
-        <div class="row">
-            <h2 class="col-md-6">Claim List</h2>
-            <div class="col-md-6 text-right" style="margin-top:25px;">
-                <i class="fa fa-print" aria-hidden="true" ng-click="claims.print()"></i>
+<div class="row">
+
+    <div class="card col-md-6" ng-show="main.isLoggedIn">
+        <div class="card-header text-center">
+            <h3>Claim List</h3>
+        </div>
+        <div class="card-content">
+            <div class="card-image">
+                <a href="/claimList"> <i class="fa fa-list fa-3x" aria-hidden="true"></i></a>
             </div>
+
+        </div>
+        <div class="card-footer text-center">
+            <span>View the list of claims registered</span>
         </div>
     </div>
-    <div class="panel-content">
-        <table class="table">
-            <thead>
 
-                <th ng-click="claims.sortBy('claimno')">ClaimId
-                    <span class="sortorder" ng-show="claims.orderBy === 'claimno'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('username')">Employee
-                    <span class="sortorder" ng-show="claims.orderBy === 'username'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('claimdate')">Claimed Date
-                    <span class="sortorder" ng-show="claims.orderBy === 'claimdates'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('claimoffice')">Claim Office
-                    <span class="sortorder" ng-show="claims.orderBy === 'claimoffice'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('claimname')">Claim Name
-                    <span class="sortorder" ng-show="claims.orderBy === 'claimname'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('claimamount')">Claim Amount
-                    <span class="sortorder" ng-show="claims.orderBy === 'claimamount'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('contactnum')">Contact Number
-                    <span class="sortorder" ng-show="claims.orderBy === 'contactnum'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('dischargedate')">Discharge date
-                    <span class="sortorder" ng-show="claims.orderBy === 'dischargedate'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('dischargeamount')">Discharge amount
-                    <span class="sortorder" ng-show="claims.orderBy === 'dischargeamount'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-                </th>
-                <th ng-click="claims.sortBy('remarks')">Remarks
-                    <span class="sortorder" ng-show="claims.orderBy === 'remarks'" ng-class="{claims.reverse: reverse}"></span>
-                </th>
-            </thead>
-            <tbody>
-                <tr ng-repeat="x in claims.claims | orderBy : claims.orderBy:claims.reverse">
-                    <td>
-                        <a ng-href="claimDetails/{{x.claimno}}">{{x.claimno}}</a>
-                    </td>
-                    <td>{{ x.username }}</td>
-                    <td>{{ x.claimdate }}</td>
-                    <td>{{ x.claimoffice }}</td>
-                    <td>{{ x.claimname }}</td>
-                    <td>{{ x.claimamount }}</td>
-                    <td>{{ x.contactnum }}</td>
-                    <td>{{ x.dischargedate }}</td>
-                    <td>{{ x.dischargeamount }}</td>
-                    <td>{{ x.remarks }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="card col-md-6" ng-show="main.isLoggedIn">
+        <div class="card-header text-center ">
+            <h3>Add Claim</h3>
+        </div>
+        <div class="card-content ">
+            <div class="card-image ">
+                <a href="/createClaim"> <i class="fa fa-plus fa-3x " aria-hidden="true "></i></a>
+            </div>
+
+        </div>
+        <div class="card-footer text-center ">
+            <span>Add a claim to a user</span>
+        </div>
+    </div>
+
+    <div class="card col-md-6 " ng-show="main.isLoggedIn && main.isAdmin">
+        <div class="card-header text-center ">
+            <h3>Add User</h3>
+        </div>
+        <div class="card-content ">
+            <div class="card-image ">
+                <a href="/register"> <i class="fa fa-plus fa-3x " aria-hidden="true "></i></a>
+            </div>
+        </div>
+        <div class="card-footer text-center ">
+            <span>Add a user in application</span>
+        </div>
+    </div>
+
+    <div class="card col-md-6" ng-show="main.isLoggedIn && main.isAdmin">
+        <div class="card-header text-center ">
+            <h3>Users List</h3>
+        </div>
+        <div class="card-content ">
+            <div class="card-image ">
+                <a href="/userList"><i class="fa fa-list fa-3x " aria-hidden="true "></i></a>
+            </div>
+
+        </div>
+        <div class="card-footer text-center ">
+            <span> View the list of users available in application</span>
+        </div>
     </div>
 </div>

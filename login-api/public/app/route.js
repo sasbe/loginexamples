@@ -9,6 +9,12 @@
             $routeProvider.when('/', {
                     templateUrl: 'app/pages/home.html',
                     authencticated: true,
+                    controller: 'home',
+                    controllerAs: "home"
+                })
+                .when('/claimList', {
+                    templateUrl: 'app/pages/claim/claimlist.html',
+                    authencticated: true,
                     controller: 'listController',
                     controllerAs: "claims"
                 })

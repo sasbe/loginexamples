@@ -43,7 +43,7 @@ var mongoose = require('mongoose');
 // Use native Node promises
 mongoose.Promise = global.Promise;
 // connect to MongoDB
-mongoose.connect('mongodb://localhost/claim')
+mongoose.connect('mongodb://127.0.0.1/claim')
     .then(() => console.log('connection succesful'))
     .catch((err) => console.error(err));
 

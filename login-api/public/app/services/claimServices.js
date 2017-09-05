@@ -8,8 +8,8 @@
             claimFactory.addClaim = function(data) {
                 return $http.post('/claims/addClaim', data);
             }
-            claimFactory.getClaims = function() {
-                return $http.get("/claims/claimList");
+            claimFactory.getClaims = function(queryString) {
+                return $http.get("/claims/claimList?" + queryString);
             }
 
             claimFactory.getClaimDetails = function(claimid) {
@@ -23,6 +23,7 @@
             claimFactory.print = function(claimData) {
                 return $http.post("/claims/print", claimData);
             }
+
             return claimFactory;
         })
 
