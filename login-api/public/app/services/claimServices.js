@@ -24,6 +24,9 @@
                 return $http.post("/claims/print", claimData);
             }
 
+            claimFactory.deleteClaim = function(userid) {
+                return $http.delete("/claims/deleteClaim/" + userid);
+            }
             return claimFactory;
         })
 

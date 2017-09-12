@@ -36,8 +36,8 @@
                     //emit apploaded
 
                 } else {
-                    controllerScope.editMode = !controllerScope.editMode;
-                    controllerScope.oldData = angualr.copy(controllerScope.userData);
+                    controllerScope.editMode = true;
+                    controllerScope.oldData = angular.copy(controllerScope.userData);
                 }
             }
             controllerScope.cancelEdit = function() {
@@ -45,6 +45,23 @@
                     controllerScope.userData = controllerScope.oldData;
                     controllerScope.editMode = false;
                 }
+            }
+            controllerScope.deleteUser = function() {
+                $scope.$emit("appLoading", true);
+                //save the content first
+                User.deleteUser(controllerScope.userData._id).then(function(data) {
+                    $scope.$emit("appLoading", false);
+                    if (data.data.success) {
+                        $scope.$emit("successReceived", data.data.message + '......Redirecting');
+                        $timeout(function() {
+                            $location.url('/');
+                        }, 2000);
+                    } else {
+                        $scope.$emit("errorReceived", data.data.message);
+                    }
+                }, function(response) {
+                    $scope.$emit("errorReceived", response.statusText);
+                });
             }
         });
 }());

@@ -3,8 +3,9 @@
         <div class="row">
             <h2 class="col-md-6" style="padding-left: 0;">User "{{ userDetails.userData.employeenumber }}"</h2>
             <div class="col-md-6 text-right" style="margin-top:25px;">
-                <i class="fa fa-pencil-square-o" ng-hide=" userform.username.$invalid || userform.emailid.$invalid || userform.department.$invalid  || (userform.level.$invalid && userform.level.$dirty)|| (|| userform.designation.$dirty &&userform.designation.$invalid)"
+                <i class="fa fa-pencil-square-o" ng-hide=" userform.username.$invalid || userform.emailid.$invalid || userform.department.$invalid  || (userform.level.$invalid && userform.level.$dirty)|| ( userform.designation.$dirty && userform.designation.$invalid)"
                     ng-class="{ 'fa-floppy-o':userDetails.editMode}" ng-click="userDetails.changeMode()" aria-hidden="true"></i>
+                <i class="fa fa-trash-o" aria-hidden="true" ng-show="!userDetails.editMode" ng-click="userDetails.deleteUser()"></i>
                 <i class="fa fa-times" aria-hidden="true" ng-show="userDetails.editMode" ng-click="userDetails.cancelEdit()"></i>
             </div>
         </div>

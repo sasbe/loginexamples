@@ -142,7 +142,6 @@ router.post('/authenticate', function(req, res) {
 });
 
 router.post('/createUser', function(req, res) {
-    console.log(req.decoded.role);
     if (req.decoded && req.decoded.role === "super") {
         var username = req.body.username,
             password = req.body.password,
@@ -189,7 +188,7 @@ router.post('/createUser', function(req, res) {
     }
 });
 
-router.delete('/')
+
 
 //give the user profile
 router.post('/me', function(req, res) {
@@ -201,7 +200,36 @@ router.post('/me', function(req, res) {
 });
 
 
-router.delete("/delete", function(req, res) {
-    console.log(req.decoded);
+router.delete("/deleteUser/:id", function(req, res) {
+    if (req.decoded && req.decoded.role === "super") {
+        var id = req.params.id;
+        if (id != undefined) {
+            User.findByIdAndRemove(id, function(err) {
+                if (!err) {
+                    return res.json({
+                        success: true,
+                        message: "User is deleted"
+                    });
+                } else {
+                    return res.json({
+                        success: true,
+                        message: "Oops! Could not delete the user. Contact the administrator."
+                    });
+                }
+            })
+        } else {
+
+            return res.json({
+                success: false,
+                message: "Oops! You are trying something that is not supported"
+            });
+
+        }
+    } else {
+        return res.json({
+            success: false,
+            message: "Oops! You are trying something that is not supported"
+        });
+    }
 });
 module.exports = router;

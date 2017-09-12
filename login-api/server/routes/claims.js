@@ -173,6 +173,38 @@ router.post('/updateClaim/:claimId', function(req, res) {
     }
 
 });
+router.delete("/deleteClaim/:id", function(req, res) {
+    if (req.decoded && req.decoded.role === "super") {
+        var id = req.params.id;
+        if (id != undefined) {
+            Claim.findByIdAndRemove(id, function(err) {
+                if (!err) {
+                    return res.json({
+                        success: true,
+                        message: "Claim is deleted"
+                    });
+                } else {
+                    return res.json({
+                        success: true,
+                        message: "Oops! Could not delete the user. Contact the administrator."
+                    });
+                }
+            })
+        } else {
+
+            return res.json({
+                success: false,
+                message: "Oops! You are trying something that is not supported"
+            });
+
+        }
+    } else {
+        return res.json({
+            success: false,
+            message: "Oops! You are trying something that is not supported"
+        });
+    }
+});
 
 //add claim
 router.post('/addClaim', function(req, res) {

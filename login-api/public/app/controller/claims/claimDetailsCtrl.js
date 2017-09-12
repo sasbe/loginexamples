@@ -47,5 +47,22 @@
                     controllerScope.editMode = false;
                 }
             }
+            controllerScope.deleteClaim = function() {
+                $scope.$emit("appLoading", true);
+                //save the content first
+                Claim.deleteClaim(controllerScope.claimData._id).then(function(data) {
+                    $scope.$emit("appLoading", false);
+                    if (data.data.success) {
+                        $scope.$emit("successReceived", data.data.message + '......Redirecting');
+                        $timeout(function() {
+                            $location.url('/');
+                        }, 2000);
+                    } else {
+                        $scope.$emit("errorReceived", data.data.message);
+                    }
+                }, function(response) {
+                    $scope.$emit("errorReceived", response.statusText);
+                });
+            }
         });
 }());
