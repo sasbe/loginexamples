@@ -5,6 +5,7 @@ var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var SECRET = "sampleapplication";
 var Claim = require('../models/claim');
+var Counter = require('../models/counters');
 
 var async = require('async');
 var officegen = require('officegen');
@@ -185,7 +186,7 @@ router.delete("/deleteClaim/:id", function(req, res) {
                     });
                 } else {
                     return res.json({
-                        success: true,
+                        success: false,
                         message: "Oops! Could not delete the user. Contact the administrator."
                     });
                 }
@@ -211,50 +212,61 @@ router.post('/addClaim', function(req, res) {
     try {
         if (req.decoded && req.decoded.role === "super") {
             var employeeno = req.body.employeeno,
-                claimno = req.body.claimno,
                 claimname = req.body.claimname,
                 claimdate = req.body.claimdate,
                 claimoffice = req.body.claimoffice,
                 claimamount = req.body.claimamount,
                 contactnum = req.body.contactnum;
-
-            if (employeeno == null || employeeno == '' || claimno == null || claimno == '' || claimdate == null || claimdate == '' ||
-                claimoffice == null || claimoffice == '' || claimamount == null || claimamount == '' || contactnum == null ||
+            console.log(employeeno + " " + claimname + " " + claimdate + " " + claimoffice + " " + claimamount + " " + contactnum);
+            if (employeeno == null || employeeno == '' || claimdate == null || claimdate == '' ||
+                claimoffice == null || claimoffice == '' || claimamount == null || claimamount === '' || contactnum == null ||
                 contactnum == '' || claimname == null || claimname == '') {
                 return res.json({ success: false, message: "Ensure required fields were provided" })
             }
-            User.findOne({
-                employeenumber: employeeno
-            }, 'username', function(userErr, claimUser) {
-                if (userErr) {
-                    return res.json({
-                        success: false,
-                        message: "Oops! You are trying something that is not supported"
-                    });
-                } else {
-                    var newClaims = new Claim();
-                    newClaims.claimname = claimname;
-                    newClaims.claimno = claimno;
-                    newClaims.claimdate = claimdate;
-                    newClaims.claimoffice = claimoffice;
-                    newClaims.claimamount = claimamount;
-                    newClaims.contactnum = contactnum;
-                    newClaims.empno = employeeno;
-                    newClaims.save(function(saveErr) {
-                        if (saveErr) {
-                            return res.json({
-                                success: false,
-                                message: saveErr
-                            });
-                        } else {
-                            return res.json({
-                                success: true,
-                                message: "Claim is created"
-                            });
-                        }
-                    });
-                }
-            });
+            Counter.findByIdAndUpdate({ _id: req.body.sequenceName }, { $inc: { sequence_value: 1 } }, { new: true, upsert: true, setDefaultsOnInsert: true },
+                function(error, counter) {
+                    console.log(counter);
+                    if (error) {
+                        return res.json({
+                            success: false,
+                            message: error
+                        });
+                    } else {
+                        User.findOne({
+                            employeenumber: employeeno
+                        }, 'username', function(userErr, claimUser) {
+                            if (userErr) {
+                                return res.json({
+                                    success: false,
+                                    message: "Oops! You are trying something that is not supported"
+                                });
+                            } else {
+                                var newClaims = new Claim();
+                                newClaims.claimname = claimname;
+                                newClaims.claimno = counter.sequence_value;
+                                newClaims.claimdate = claimdate;
+                                newClaims.claimoffice = claimoffice;
+                                newClaims.claimamount = claimamount;
+                                newClaims.contactnum = contactnum;
+                                newClaims.empno = employeeno;
+                                newClaims.save(function(saveErr) {
+                                    if (saveErr) {
+                                        return res.json({
+                                            success: false,
+                                            message: saveErr
+                                        });
+                                    } else {
+                                        return res.json({
+                                            success: true,
+                                            message: "Claim is created"
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                })
+
         } else {
             return res.json({
                 success: false,
@@ -264,6 +276,16 @@ router.post('/addClaim', function(req, res) {
     } catch (err) {
         console.log(err);
         next();
+    }
+
+    function getNextSequenceValue(sequenceName) {
+        var sequenceDocument = Counters.findAndModify({
+            query: { _id: sequenceName },
+            update: { $inc: { sequence_value: 1 } },
+            new: true
+        });
+
+        return sequenceDocument.sequence_value;
     }
 
 });

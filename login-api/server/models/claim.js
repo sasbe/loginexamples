@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+
 
 var claimSchema = mongoose.Schema({
     claimno: { type: Number, required: true },

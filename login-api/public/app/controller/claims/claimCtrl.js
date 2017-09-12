@@ -7,8 +7,11 @@
             var controllerScope = this;
             controllerScope.claimData = {
                 claimdate: (new Date()).toISOString(),
+                claimamount: 0
             };
             controllerScope.addClaim = function() {
+                var localeDate = new Date(controllerScope.claimData.claimdate)
+                controllerScope.claimData.sequenceName = AD2BS(localeDate.getFullYear() + "-" + (localeDate.getMonth() + 1) + "-" + localeDate.getDate()).split("-")[0];
                 $scope.$emit("appLoading", true);
                 Claim.addClaim(controllerScope.claimData).then(function(data) {
                     if (data.data.success) {

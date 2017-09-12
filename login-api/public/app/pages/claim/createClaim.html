@@ -14,12 +14,14 @@
 
             </div>
             <div class="form-group col-md-6">
-                <label for="claimno">Claim No:</label>
-                <input type="text" class="form-control" name="claimno" placeholder="claim nunmber" ng-model="createClaim.claimData.claimno" required>
-                <div class="error" ng-show="addClaimForm.claimno.$dirty && addClaimForm.claimno.$invalid">
-                    <span ng-show="addClaimForm.claimno.$error.required">Value is required.</span>
+                <label for="contactnum">Contact number</label>
+                <input type="text" class="form-control" name="contactnum" placeholder="contact number" ng-model="createClaim.claimData.contactnum" number required>
+                <div class="error" ng-show="addClaimForm.contactnum.$dirty && addClaimForm.contactnum.$invalid">
+                    <span ng-show="addClaimForm.contactnum.$error.required">Value is required.</span>
+                    <span ng-show="addClaimForm.contactnum.$error.number">Phone number is invalid.</span>
                 </div>
             </div>
+
         </div>
         <div class="row">
             <div class="form-group col-md-6">
@@ -53,15 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="contactnum">Contact number</label>
-                <input type="text" class="form-control" name="contactnum" placeholder="contact number" ng-model="createClaim.claimData.contactnum" required>
-                <div class="error" ng-show="addClaimForm.contactnum.$dirty && addClaimForm.contactnum.$invalid">
-                    <span ng-show="addClaimForm.contactnum.$error.required">Value is required.</span>
-                </div>
-            </div>
-        </div>
+
         <button type="submit" class="btn btn-primary" ng-disabled=" addClaimForm.contactnum.$invalid ||
   addClaimForm.claimdate.$invalid|| addClaimForm.claimname.$invalid || 
    addClaimForm.claimoffice.$invalid ||  addClaimForm.claimno.$invalid || 
