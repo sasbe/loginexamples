@@ -27,6 +27,90 @@ router.use(function(req, res, next) {
         }
     }
 });
+router.get('/userList', function(req, res, next) {
+    // forming query criteria
+    if (req.decoded && req.decoded.role === "super") {
+        var filter = {};
+        if (req.query.skip) {
+            filter.skip = parseInt(req.query.skip);
+        }
+        if (req.query.limit) {
+            filter.limit = parseInt(req.query.limit);
+        }
+        var criteria = {};
+        if (req.query.empno && req.query.empno != "undefined") {
+            criteria.employeenumber = parseInt(req.query.empno);
+        }
+
+        User.find(
+            criteria, "username emailid employeenumber designation level woffice role", filter,
+            function(err, users) {
+                if (err) {
+                    return res.json({
+                        success: false,
+                        message: err
+                    });
+                } else {
+                    return res.json({
+                        success: true,
+                        users: users
+                    });
+                }
+            })
+    } else {
+        return res.redirect('/');
+    }
+
+});
+router.get("/individual/:userid", function(req, res) {
+    if (req.decoded && req.decoded.role == "super" && req.params.userid != "undefined") {
+        User.findById(req.params.userid, function(err, user) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: "Something went wrong. Please contact the administrator"
+                });
+            } else {
+
+                res.json({
+                    success: true,
+                    user: user
+                });
+            }
+        });
+    } else {
+        return res.redirect('/');
+    }
+});
+router.post('/updateUser/:userId', function(req, res) {
+    if (req.decoded && req.decoded.role === "super") {
+        User.findById(req.params.userId, function(err, user) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: "Server failure. Please contact the administrator"
+                });
+            } else {
+                console.log(req.body);
+                user.save(function(err) {
+                    if (err) {
+                        return res.json({
+                            success: false,
+                            message: "Server failure. Please contact the administrator"
+                        });
+                    } else {
+                        return res.json({
+                            success: true,
+                            message: "User details are updated"
+                        });
+                    }
+                })
+            }
+        });
+    } else {
+        return res.redirect('/');
+    }
+});
 router.post('/authenticate', function(req, res) {
     console.log(req.body.employeenumber);
     User.findOne({
@@ -58,7 +142,8 @@ router.post('/authenticate', function(req, res) {
 });
 
 router.post('/createUser', function(req, res) {
-    if (req.decoded && req.decode.role === "super") {
+    console.log(req.decoded.role);
+    if (req.decoded && req.decoded.role === "super") {
         var username = req.body.username,
             password = req.body.password,
             emailid = req.body.emailid,
@@ -104,6 +189,8 @@ router.post('/createUser', function(req, res) {
     }
 });
 
+router.delete('/')
+
 //give the user profile
 router.post('/me', function(req, res) {
     console.log(req.decoded);
@@ -111,5 +198,10 @@ router.post('/me', function(req, res) {
         success: true,
         userDetails: req.decoded
     });
+});
+
+
+router.delete("/delete", function(req, res) {
+    console.log(req.decoded);
 });
 module.exports = router;

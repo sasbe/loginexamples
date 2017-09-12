@@ -37,7 +37,14 @@
                     //emit apploaded
 
                 } else {
+                    controllerScope.oldData = angular.copy(controllerScope.claimData);
                     controllerScope.editMode = !controllerScope.editMode;
+                }
+            }
+            controllerScope.cancelEdit = function() {
+                if (controllerScope.editMode) {
+                    controllerScope.claimData = controllerScope.oldData;
+                    controllerScope.editMode = false;
                 }
             }
         });

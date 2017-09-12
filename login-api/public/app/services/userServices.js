@@ -11,6 +11,18 @@
             userFactory.addClaim = function(data) {
                 return $http.post('/claims/addClaim', data);
             }
+            userFactory.getUsers = function(queryString) {
+                return $http.get("/users/userList?" + queryString);
+            }
+            userFactory.deleteUser = function(userid) {
+                return $http.delete("/users/delete", { employeenumber: userid });
+            }
+            userFactory.getUserDetails = function(userid) {
+                return $http.get("/users/individual/" + userid);
+            }
+            userFactory.updateUser = function(userid, userData) {
+                return $http.post("/users/updateUser/" + userid, userData);
+            }
             return userFactory;
         })
 

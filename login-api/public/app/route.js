@@ -15,7 +15,7 @@
                 .when('/claimList', {
                     templateUrl: 'app/pages/claim/claimlist.html',
                     authencticated: true,
-                    controller: 'listController',
+                    controller: 'claimListController',
                     controllerAs: "claims"
                 })
                 .when('/claimDetails/:id', {
@@ -24,7 +24,20 @@
                     controller: 'claimDetails',
                     controllerAs: "claimDetails"
                 })
-                .when('/register', {
+                .when('/userList', {
+                    templateUrl: 'app/pages/users/userList.html',
+                    authencticated: true,
+                    controller: 'userListController',
+                    controllerAs: "users"
+                })
+                .when('/userDetails/:id', {
+                    templateUrl: 'app/pages/users/userDetails.html',
+                    authencticated: true,
+                    controller: 'userDetails',
+                    controllerAs: "userDetails"
+                })
+
+            .when('/register', {
                     templateUrl: 'app/pages/users/register.html',
                     controller: 'regCtrl',
                     controllerAs: 'register',
@@ -75,7 +88,7 @@
                 console.log("No authentication required");
                 if (Auth.isLoggedIn()) {
                     event.preventDefault();
-                    $location.path('/profile');
+                    $location.path('/');
                 }
             } else if (next.$$route.authencticated == true) {
                 if (!Auth.isLoggedIn()) {

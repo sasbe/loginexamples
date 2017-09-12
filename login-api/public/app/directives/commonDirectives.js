@@ -16,7 +16,6 @@
                     '    <i ng-class="selectedCls(order)"></i>' +
                     '</a>',
                 link: function(scope) {
-
                         // change sorting order
                         scope.sort_by = function(newSortingOrder) {
                             var sort = scope.sort;
@@ -56,21 +55,23 @@
 
         })
         .directive('nepalimoney', function() {
+            var NUMBER_REGEXP = /[+-]?([0-9]*[.])?[0-9]+/g;
             return {
                 replace: true,
                 require: "ngModel",
                 restrict: "E",
-                link: function(scope, element, attrs, ngModel) {
+                link: function(scope, element, attrs, ctrl) {
                     element.on("focus", function(event) {
                         element.val(accounting.unformat(element.val()));
                     }).on("blur", function(event) {
                         element.val(accounting.formatMoney(element.val()));
                     });
-                    ngModel.$render = function() {
-                        if (ngModel.$modelValue) {
-                            element.val(accounting.formatMoney(ngModel.$modelValue));
-                        }
+                    ctrl.$render = function() {
+                        element.val(accounting.formatMoney(ctrl.$modelValue));
                     }
+                    ctrl.$validators.money = function(modelValue, viewValue) {
+                        return NUMBER_REGEXP.test(viewValue);
+                    };
                 },
                 template: '<input type="text" class="form-control">'
             }
@@ -102,30 +103,45 @@
                 replace: true,
                 require: "ngModel",
                 restrict: "E",
-                link: function(scope, element, attrs, ngModel) {
+                link: function(scope, element, attrs, ctrl) {
                     var inputField = $("input", element);
+                    inputField.on("keydown", function() {
+                        return false;
+                    })
                     inputField.attr("id", Date.now())
                         .nepaliDatePicker({
-                            onFocus: false,
+                            onFocus: true,
                             npdMonth: true,
                             npdYear: true,
                             onChange: function() {
-                                ngModel.$setViewValue(BS2AD(inputField.val()));
+                                ctrl.$setViewValue(BS2AD(inputField.val()));
                             },
                             disableBefore: '01/01/2069'
                         });
                     $("i", element).on("click", function() {
                         showNdpCalendarBox(inputField.attr("id"));
                     });
-                    ngModel.$render = function() {
-                        if (ngModel.$modelValue) {
-                            var localeDate = new Date(ngModel.$modelValue)
+                    ctrl.$render = function() {
+                        if (ctrl.$modelValue) {
+                            var localeDate = new Date(ctrl.$modelValue)
                             inputField.val(AD2BS(localeDate.getFullYear() + "-" + (localeDate.getMonth() + 1) + "-" + localeDate.getDate()));
                         }
                     }
                 },
-                template: '<div class="datepicker"><input readonly="readonly" type="text"  class="form-control "><i class="ndp-click-trigger fa fa-calendar" aria-hidden="true" ngclick="opendatePicker"></i></div>'
+                template: '<div class="datepicker"><input type="text"  class="form-control "><i class="ndp-click-trigger fa fa-calendar" aria-hidden="true" ngclick="opendatePicker"></i></div>'
             }
 
-        });
+        })
+        .directive('number', function() {
+            var NUMBER_REGEXP = /^(\d+)$/;
+            return {
+                require: 'ngModel',
+                restrict: "A",
+                link: function(scope, elm, attrs, ctrl) {
+                    ctrl.$validators.number = function(modelValue, viewValue) {
+                        return NUMBER_REGEXP.test(viewValue);
+                    };
+                }
+            };
+        })
 }());

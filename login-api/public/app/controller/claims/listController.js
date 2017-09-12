@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('ListControllers', ['claimServices', 'commonServices'])
-        .controller('listController', function($scope, $location, $timeout, Claim, Query, $http) {
+        .module('ClaimListControllers', ['claimServices', 'commonServices'])
+        .controller('claimListController', function($scope, $location, $timeout, Claim, Query, $http) {
             var controllerScope = this;
             $scope.sort = {
                 sortingOrder: 'claimno',

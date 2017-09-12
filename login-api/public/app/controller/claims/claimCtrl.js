@@ -6,16 +6,7 @@
         .controller('createClaimCtrl', function($location, $timeout, Claim, $scope) {
             var controllerScope = this;
             controllerScope.claimData = {
-                employeeno: 1,
-                claimno: '1',
                 claimdate: (new Date()).toISOString(),
-                claimoffice: 'new road',
-                claimname: 'Medical Bills',
-                claimamount: 12345,
-                contactnum: 123456789,
-                dischargedate: '',
-                reimbursedamount: '',
-                remarks: ''
             };
             controllerScope.addClaim = function() {
                 $scope.$emit("appLoading", true);

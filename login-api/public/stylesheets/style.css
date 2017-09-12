@@ -3,7 +3,7 @@
 @font-face {
     font-family: "San Francisco";
     font-weight: 400;
-    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+    src: url("/fonts/sanfranciscodisplay-regular-webfont.woff");
 }
 
 html {
@@ -23,6 +23,17 @@ body {
 
 .show-hide-message.ng-hide-remove {
     animation: zoomIn 0.3s both ease;
+}
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control,
+.datepicker[disabled="disabled"] input {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    cursor: pointer;
+    padding-left: 0;
 }
 
 .navbar {
@@ -115,7 +126,8 @@ table tr:nth-child(even) {
 
 .panel-info>.panel-heading {
     border: none;
-    background: none;
+    background: aliceblue;
+    margin-bottom: 24px;
 }
 
 .panel-info {
@@ -128,6 +140,11 @@ table tr:nth-child(even) {
     background: none;
 }
 
+.error {
+    font-size: 16px;
+    color: red;
+}
+
 .required:after {
     content: '*';
     color: red;
@@ -138,11 +155,6 @@ table tr:nth-child(even) {
     padding: 0;
 }
 
-.datepicker .form-control[readonly] {
-    position: relative;
-    background-color: #FFF;
-}
-
 .datepicker .ndp-click-trigger {
     position: absolute;
     right: 0;
@@ -150,8 +162,13 @@ table tr:nth-child(even) {
     padding: 6px 12px;
 }
 
-nepalidatepicker[disabled="disabled"] .ndp-click-trigger {
+.datepicker[disabled="disabled"] .ndp-click-trigger {
     display: none;
+}
+
+.filter {
+    border-bottom: 2px solid #ececec;
+    margin: 0;
 }
 
 .filter .pagination {
@@ -205,7 +222,14 @@ nepalidatepicker[disabled="disabled"] .ndp-click-trigger {
     background: #fff;
 }
 
+.form-horizontal .control-label {
+    text-align: left;
+}
+
 @media all and (max-width: 768px) {
+    html {
+        background: #fff;
+    }
     table td:before {
         content: attr(data-label);
         float: left;

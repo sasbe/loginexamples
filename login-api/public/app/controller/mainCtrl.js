@@ -75,10 +75,8 @@
             controllerScope.logOut = function() {
                 $rootScope.$emit("appLoading", true);
                 Auth.logOut();
-                $location.path('/logout');
-                $timeout(function() {
-                    $location.path('/')
-                }, 2000)
+                $location.path('/login');
+                $rootScope.$emit("appLoading", false);
             };
 
             controllerScope.facebook = function() {

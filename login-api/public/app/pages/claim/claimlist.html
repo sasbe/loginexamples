@@ -15,8 +15,10 @@
             </div>
             <div class="col-md-10">
                 <div class="form-group col-md-6">
-                    <label aria-labelledby="filter">Search:</label>
-                    <input type="text" id="filter" ng-model="claims.filter">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        <input ng-model="claims.filter" type="text" class="form-control" name="email" placeholder="Search in page">
+                    </div>
                 </div>
                 <ul class=" pagination pull-right ">
                     <li ng-hide="claims.filters.skip==0">

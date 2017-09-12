@@ -6,14 +6,7 @@
         .controller('regCtrl', function($location, $timeout, User, $scope) {
             var controllerScope = this;
             controllerScope.regData = {
-                username: 'sagar',
-                emailid: 'subedisagar52@gmail.com',
-                password: 'password',
-                employeenumber: 1,
-                designation: "Director",
-                level: "",
-                availableLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-                woffice: "BUSINESS MANAGEMENT DEPARTMENT",
+                availableLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
             }
             controllerScope.regUser = function() {
                 $scope.$emit("appLoading", true);

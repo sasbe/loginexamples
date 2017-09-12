@@ -4,61 +4,77 @@
             <h2 class="col-md-6">Detail of claim "{{ claimDetails.claimData.claimno }}"</h2>
             <div class="col-md-6 text-right" style="margin-top:25px;">
                 <i class="fa fa-pencil-square-o" ng-class="{ 'fa-floppy-o':claimDetails.editMode}" ng-click="claimDetails.changeMode()" aria-hidden="true"></i>
+                <i class="fa fa-times" aria-hidden="true" ng-show="claimDetails.editMode" ng-click="claimDetails.cancelEdit()"></i>
             </div>
         </div>
     </div>
+    <div class="row">
+        <form class="form-horizontal">
+            <div class="col-md-6">
+                <div class="form-group ">
+                    <label class="control-label col-md-6 ">Employee no:</label>
+                    <div class="col-md-6 ">
+                        <p class="form-control-static ">{{claimDetails.claimData.empno}}</p>
+                    </div>
 
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label aria-labelledby="employeeno">Employee Number:</label>
-            <span class="form-control" id="employeeno">{{claimDetails.claimData.empno}}</span>
-        </div>
-        <div class="form-group col-md-6">
-            <label aria-labelledby="dischargedate">Discharge date:</label>
-            <nepalidatepicker ng-model="claimDetails.claimData.dischargedate" ng-disabled="!claimDetails.editMode"></nepalidatepicker>
-        </div>
+                </div>
 
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label aria-labelledby="claimno">Claim No:</label>
-            <span id="claimno" class="form-control">{{claimDetails.claimData.claimno}}</span>
-        </div>
-        <div class="form-group col-md-6">
-            <label aria-labelledby="reimbursedamount">Discharge Amount</label>
-            <nepalimoney ng-model="claimDetails.claimData.reimbursedamount" ng-disabled="!claimDetails.editMode"></nepalimoney>
-        </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6 ">Claimamount no:</label>
+                    <div class="col-md-6">
+                        <p class="form-control-static ">{{claimDetails.claimData.claimno}}</p>
+                    </div>
+                </div>
 
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label aria-labelledby="claimname">Claim Name:</label>
-            <span class="form-control" id="claimname">{{claimDetails.claimData.claimname}}</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label aria-labelledby="contactnum">Contact number</label>
-            <span class="form-control" id="contactnum">{{claimDetails.claimData.contactnum}}</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="claimamount">Claim Amount(NRS)</label>
-            <nepalimoneyreadonly money="{{claimDetails.claimData.claimamount}}" class="form-control">
-            </nepalimoneyreadonly>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label aria-labelledby="claimdate">Claim Date:</label>
-            <nepalidatereadonly date="{{claimDetails.claimData.claimdate}}" class="form-control"></nepalidatereadonly>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label aria-labelledby="claimoffice">Claim Office:</label>
-            <span class="form-control" id="claimoffice">{{claimDetails.claimData.claimoffice}}</span>
-        </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6 ">Claim name:</label>
+                    <div class="col-md-6 ">
+                        <p class="form-control-static ">{{claimDetails.claimData.name}}</p>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-6 ">Contact no:</label>
+                    <div class="col-md-6 ">
+                        <p class="form-control-static ">{{claimDetails.claimData.contactnums}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-6 ">Claim Amount(NRS):</label>
+                    <div class="col-md-6 ">
+                        <nepalimoneyreadonly money="{{claimDetails.claimData.claimamount}} " class="form-control-static ">
+                        </nepalimoneyreadonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6 ">Claim date (B.S):</label>
+                    <div class="col-md-6 ">
+                        <nepalidatereadonly date="{{claimDetails.claimData.claimdate}} " class="form-control-static "></nepalidatereadonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6 ">Claim office:</label>
+                    <div class="col-md-6 ">
+                        <p class="form-control-static ">{{claimDetails.claimData.claimoffice}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label aria-labelledby="dischargedate ">Discharge date:</label>
+                    <nepalidatepicker ng-model="claimDetails.claimData.dischargedate " ng-disabled="main.isAdmin && !claimDetails.editMode "></nepalidatepicker>
+                </div>
+                <div class="form-group">
+                    <label aria-labelledby="reimbursedamount ">Discharge amount</label>
+                    <nepalimoney ng-model="claimDetails.claimData.reimbursedamount " ng-disabled="main.isAdmin && !claimDetails.editMode "></nepalimoney>
+                </div>
+                <div class="form-group">
+                    <label>Remarks:</label>
+                    <textarea ng-model="claimDetails.claimData.remarks" class="form-control" cols="30" rows="10" ng-disabled="main.isAdmin && !claimDetails.editMode "></textarea>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

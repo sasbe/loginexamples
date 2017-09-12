@@ -6,66 +6,67 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="employeeno">Employee Number:</label>
-                <input type="number" class="form-control" name="employeeno" placeholder="Enter employee number" ng-model="createClaim.claimData.employeeno" required>
-                <span style="color:red" ng-show="addClaimForm.employeeno.$dirty && addClaimForm.employeeno.$invalid">
-            <span ng-show="addClaimForm.employeeno.$error.required">employeeno is required.</span>
-                </span>
+                <input type="text" class="form-control" name="employeeno" number placeholder="Enter employee number" ng-model="createClaim.claimData.employeeno" required>
+                <div class="error" ng-show="addClaimForm.employeeno.$dirty && addClaimForm.employeeno.$invalid">
+                    <span ng-show="addClaimForm.employeeno.$error.required">Value is required.</span>
+                    <span ng-show="!addClaimForm.employeeno.$error.required && addClaimForm.employeeno.$error.number">Enter a valid number.</span>
+                </div>
+
             </div>
             <div class="form-group col-md-6">
                 <label for="claimno">Claim No:</label>
-                <input type="text" class="form-control" name="claimno" placeholder="Enter the claim no" ng-model="createClaim.claimData.claimno" required>
-                <span style="color:red" ng-show="addClaimForm.claimno.$dirty && addClaimForm.claimno.$invalid">
-            <span ng-show="addClaimForm.claimno.$error.required">claimno is required.</span>
-                </span>
+                <input type="text" class="form-control" name="claimno" placeholder="claim nunmber" ng-model="createClaim.claimData.claimno" required>
+                <div class="error" ng-show="addClaimForm.claimno.$dirty && addClaimForm.claimno.$invalid">
+                    <span ng-show="addClaimForm.claimno.$error.required">Value is required.</span>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="claimdate">Claim Date:</label>
                 <nepalidatepicker ng-model="createClaim.claimData.claimdate" required></nepalidatepicker>
-                <!-- <input type="text" class="form-control" name="claimdate" placeholder="Enter the claimdate" ng-model="createClaim.claimData.claimdate" required> -->
-                <span style="color:red" ng-show="addClaimForm.claimdate.$dirty && addClaimForm.claimdate.$invalid">
-            <span ng-show="addClaimForm.emailid.$error.required">claimdate is required.</span>
-                </span>
+                <div class="error" ng-show="addClaimForm.claimdate.$dirty && addClaimForm.claimdate.$invalid">
+                    <span ng-show="addClaimForm.emailid.$error.required">Value is required.</span>
+                </div>
             </div>
             <div class="form-group col-md-6">
                 <label for="claimoffice">Claim Office:</label>
-                <input type="text" class="form-control" name="claimoffice" placeholder="Enter the claimoffice" ng-model="createClaim.claimData.claimoffice" required>
-                <span style="color:red" ng-show="addClaimForm.claimoffice.$dirty && addClaimForm.claimoffice.$invalid">
-            <span ng-show="addClaimForm.claimoffice.$error.required">claimoffice is required.</span>
-                </span>
+                <input type="text" class="form-control" name="claimoffice" placeholder="office name" ng-model="createClaim.claimData.claimoffice" required>
+                <div class="error" ng-show="addClaimForm.claimoffice.$dirty && addClaimForm.claimoffice.$invalid">
+                    <span ng-show="addClaimForm.claimoffice.$error.required">Value is required.</span>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="claimname">Claim Name:</label>
-                <input type="text" class="form-control" name="claimname" placeholder="Enter the claimname" ng-model="createClaim.claimData.claimname" required>
-                <span style="color:red" ng-show="addClaimForm.claimname.$dirty && addClaimForm.claimname.$invalid">
-            <span ng-show="addClaimForm.claimname.$error.required">claimname is required.</span>
-                </span>
+                <input type="text" class="form-control" name="claimname" placeholder="claim name" ng-model="createClaim.claimData.claimname" required>
+                <div class="error" ng-show="addClaimForm.claimname.$dirty && addClaimForm.claimname.$invalid">
+                    <span ng-show="addClaimForm.claimname.$error.required">Value is required.</span>
+                </div>
             </div>
             <div class="form-group col-md-6">
                 <label for="claimamount">Claim Amount(NRS)</label>
-                <!-- <input type="text" class="form-control" name="claimamount" placeholder="Enter the claimamount" ng-model="createClaim.claimData.claimamount" required> -->
                 <nepalimoney ng-model="createClaim.claimData.claimamount" required></nepalimoney>
-                <span style="color:red" ng-show="addClaimForm.claimamount.$dirty && addClaimForm.claimamount.$invalid">
-            <span ng-show="addClaimForm.claimamount.$error.required">claimamount is required.</span>
-                </span>
+                <div class="error" ng-show="addClaimForm.claimamount.$dirty && addClaimForm.claimamount.$invalid">
+                    <span ng-show="addClaimForm.claimamount.$error.required">Value is required.</span>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="contactnum">Contact number</label>
-                <input type="text" class="form-control" name="contactnum" placeholder="Enter the contactnum" ng-model="createClaim.claimData.contactnum" required>
-                <span style="color:red" ng-show="addClaimForm.contactnum.$dirty && addClaimForm.contactnum.$invalid">
-            <span ng-show="addClaimForm.contactnum.$error.required">contactnum is required.</span>
-                </span>
+                <input type="text" class="form-control" name="contactnum" placeholder="contact number" ng-model="createClaim.claimData.contactnum" required>
+                <div class="error" ng-show="addClaimForm.contactnum.$dirty && addClaimForm.contactnum.$invalid">
+                    <span ng-show="addClaimForm.contactnum.$error.required">Value is required.</span>
+                </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" ng-disabled="addClaimForm.contactnum.$dirty && addClaimForm.contactnum.$invalid ||
-  addClaimForm.claimdate.$dirty && addClaimForm.claimdate.$invalid|| addClaimForm.claimname.$dirty && addClaimForm.claimname.$invalid || 
-  addClaimForm.claimoffice.$dirty && addClaimForm.claimoffice.$invalid || addClaimForm.claimno.$dirty && addClaimForm.claimno.$invalid || 
-  addClaimForm.claimamount.$dirty && addClaimForm.claimamount.$invalid || addClaimForm.employeeno.$dirty && addClaimForm.employeeno.$invalid">Add Claim</button>
+        <button type="submit" class="btn btn-primary" ng-disabled=" addClaimForm.contactnum.$invalid ||
+  addClaimForm.claimdate.$invalid|| addClaimForm.claimname.$invalid || 
+   addClaimForm.claimoffice.$invalid ||  addClaimForm.claimno.$invalid || 
+   addClaimForm.claimamount.$invalid || addClaimForm.employeeno.$invalid || addClaimForm.employeenumber.$error.number||
+   addClaimForm.claimamount.$error.money || addClaimForm.emailid.$error.date">Add Claim</button>
 
     </form>
 </div>

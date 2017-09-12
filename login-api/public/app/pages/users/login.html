@@ -5,20 +5,20 @@
     <div class="form-group">
         <span class="required"></span>
         <label for="employeenumber">Employee Number:</label>
-        <input type="text" class="form-control" name="employeenumber" autofocus placeholder="Enter user number" ng-model="main.loginData.employeenumber" required>
-        <span style="color:red" ng-show="loginForm.employeenumber.$dirty && loginForm.employeenumber.$invalid">
-        <span ng-show="loginForm.employeenumber.$error.required">employeenumber is required.</span>
-        </span>
+        <input type="text" class="form-control" name="employeenumber" number autofocus placeholder="Enter user number" ng-model="main.loginData.employeenumber" required>
+        <div class="error" ng-show="loginForm.employeenumber.$dirty && loginForm.employeenumber.$invalid">
+            <span ng-show="loginForm.employeenumber.$error.number || loginForm.employeenumber.$error.required">Please enter a number.</span>
+        </div>
     </div>
     <div class="form-group">
         <span class="required"></span>
         <label for="password">Password:</label>
         <input type="password" class="form-control" name="password" placeholder="Enter password" ng-model="main.loginData.password" required>
-        <span style="color:red" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+        <span class="error" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
         <span ng-show="loginForm.password.$error.required">Password is required.</span>
         </span>
     </div>
 
-    <button type="submit" class="btn btn-primary" ng-disabled="loginForm.employeenumber.$dirty && loginForm.employeenumber.$invalid || loginForm.password.$dirty && loginForm.password.$invalid">Login</button>
-    <!-- <button ng-click="main.facebook()" class="btn btn-success" type="button">Facebook</a> -->
+    <button type="submit" class="btn btn-primary" ng-disabled="loginForm.employeenumber.$invalid ||  loginForm.password.$invalid || loginForm.employeenumber.$error.number">Login</button>
+
 </form>
