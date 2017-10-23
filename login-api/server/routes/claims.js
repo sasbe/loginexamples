@@ -134,7 +134,7 @@ router.get('/claimList', function(req, res, next) {
 
 });
 
-router.post('/updateClaim/:claimId', function(req, res) {
+router.put('/updateClaim/:claimId', function(req, res) {
     try {
         Claim.findById(req.params.claimId, function(err, claim) {
             if (err) {
@@ -291,6 +291,7 @@ router.post('/addClaim', function(req, res) {
 });
 
 router.post('/print', function(req, res) {
+    console.log(true);
     var docx = officegen({
         type: 'docx',
         orientation: 'landscape'
@@ -306,80 +307,56 @@ router.post('/print', function(req, res) {
         align: "Center",
         font_size: 15,
         font_face: 'Times New Roman',
-        bold: true ``
+        bold: true
     });
 
     header.addHorizontalLine();
+    var headerStyle = {
+        b: true,
+        fontFamily: "FONTASY_ HIMALI_ TT",
+        sz: '22'
+    };
     var table = [
         [{
-            val: "Claim Number",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT",
-            }
+            val: "Claim No",
+            opts: headerStyle
         }, {
-            val: "Claimer",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            val: "Employee No",
+            opts: headerStyle
         }, {
             val: "Claim Name",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            opts: headerStyle
         }, {
             val: "Claimed Date",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            opts: headerStyle
         }, {
-            val: "Claim office",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            val: "Claim Office",
+            opts: headerStyle
         }, {
             val: "Claimed Amount",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            opts: headerStyle
         }, {
-            val: "Contact",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            val: "Contact No",
+            opts: headerStyle
         }, {
-            val: "Discharge date",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            val: "Discharge Date",
+            opts: headerStyle
         }, {
-            val: "Discharge amount",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            val: "Reimbursed Amount",
+            opts: headerStyle
         }, {
             val: "Remarks",
-            opts: {
-                b: true,
-                fontFamily: "FONTASY_ HIMALI_ TT"
-            }
+            opts: headerStyle
         }]
     ]
     var datum = req.body;
+
     if (datum) {
         for (var i = 0, j = 1, length = datum.length; i < length; i++, j++) {
             var row = datum[i];
             var rowArray = [
                 row.claimno,
-                row.username,
+                row.empno,
                 row.claimname,
                 row.claimdate,
                 row.claimoffice,
@@ -398,6 +375,7 @@ router.post('/print', function(req, res) {
         tableFontFamily: "Calibri",
         borders: true,
         tableColWidth: 3000,
+        tableSize: 22
     }
 
     var pObj = docx.createTable(table, tableStyle);

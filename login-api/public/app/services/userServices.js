@@ -18,7 +18,10 @@
                 return $http.get("/users/individual/" + userid);
             }
             userFactory.updateUser = function(userid, userData) {
-                return $http.post("/users/updateUser/" + userid, userData);
+                return $http.put("/users/updateUser/" + userid, userData);
+            }
+            userFactory.changePassword = function(userid, userData) {
+                return $http.post("/users/changePassword/" + userid, userData);
             }
             userFactory.deleteUser = function(userid) {
                 return $http.delete("/users/deleteUser/" + userid);

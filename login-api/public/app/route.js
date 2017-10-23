@@ -36,8 +36,7 @@
                     controller: 'userDetails',
                     controllerAs: "userDetails"
                 })
-
-            .when('/register', {
+                .when('/register', {
                     templateUrl: 'app/pages/users/register.html',
                     controller: 'regCtrl',
                     controllerAs: 'register',
@@ -55,6 +54,12 @@
                 .when('/profile', {
                     templateUrl: 'app/pages/users/profile.html',
                     authencticated: true
+                })
+                .when('/changePassword', {
+                    templateUrl: 'app/pages/users/changePassword.html',
+                    authencticated: true,
+                    controller: 'changePassword',
+                    controllerAs: 'changePassword'
                 })
                 .when('/facebook/:token', {
                     templateUrl: 'app/pages/users/social/social.html',

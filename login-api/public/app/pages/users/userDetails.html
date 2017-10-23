@@ -52,9 +52,7 @@
                 <div class="form-group">
                     <span ng-class="{required: userDetails.editMode}"></span>
                     <label>Level</label>
-                    <select name="level" class="form-control" ng-disabled="main.isAdmin && !userDetails.editMode " ng-model="userDetails.userData.level" required>
-            <option ng-repeat="option in userDetails.availableLevels " value="{{option}} ">{{option}}</option>
-            </select>
+                    <select name="level" class="form-control" ng-disabled="main.isAdmin && !userDetails.editMode " ng-model="userDetails.userData.level" required ng-options="option for option in userDetails.availableLevels"></select>
                     <div class="error " ng-show="userform.level.$dirty && userform.level.$invalid ">
                         <span ng-show="userform.level.$error.required ">Level is required.</span>
                     </div>

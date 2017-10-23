@@ -22,7 +22,13 @@
                 retrieveClaims(controllerScope.filters.formQueryString());
             };
             controllerScope.claims = [];
-
+            $scope.getAll = false;
+            $scope.$watch("getAll", function() {
+                if ($scope.getAll == true)
+                    controllerScope.filters.limit = null;
+                else
+                    controllerScope.filters.limit = 5;
+            });
             controllerScope.filters = new Query();
 
             var retrieveClaims = function(queryFilter) {

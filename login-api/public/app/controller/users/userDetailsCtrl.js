@@ -6,7 +6,7 @@
         .controller('userDetails', function($scope, $location, $timeout, User, $routeParams) {
             var controllerScope = this;
             controllerScope.editMode = false;
-            controllerScope.availableLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+            controllerScope.availableLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
             User.getUserDetails($routeParams.id).then(function(data) {
                 if (data.data.success) {
                     controllerScope.userData = data.data.user;

@@ -49,6 +49,7 @@ mongoose.connect('mongodb://127.0.0.1/claim')
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+    console.log('test')
     var err = new Error('Not Found');
     err.status = 404;
     err.message = "page not found";
@@ -62,7 +63,7 @@ app.use(function(err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // render the error page
-    console.log(err.message);
+    console.log(err.message + err.status);
     res.status(err.status || 500);
     res.send({
         success: false,

@@ -1,4 +1,4 @@
-<div class="panel panel-info">
+<div class="panel panel-info" ng-hide="main.appLoading">
     <div class="panel-heading">
         <div class="row">
             <h2 class="col-md-6">Claim List</h2>
@@ -52,6 +52,10 @@
                     <div class="col-md-6 form-group ">
                         <label>Claim no:</label>
                         <input type="text " class="form-control " ng-model="claims.filters.claimno " />
+                    </div>
+                    <div class="col-md-6 form-group ">
+                        <label>Get all data:</label>
+                        <input type="checkbox" ng-model="getAll" />
                     </div>
                 </div>
                 <div class="form-group ">

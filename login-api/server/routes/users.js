@@ -7,8 +7,7 @@ var SECRET = "sampleapplication";
 var excludePath = ['/users/authenticate'];
 
 router.use(function(req, res, next) {
-    console.log(req.originalUrl);
-    console.log(excludePath.indexOf(req.originalUrl));
+    console.log("middle ware");
     if (excludePath.indexOf(req.originalUrl) != -1) {
         next();
     } else {
@@ -82,7 +81,7 @@ router.get("/individual/:userid", function(req, res) {
         return res.redirect('/');
     }
 });
-router.post('/updateUser/:userId', function(req, res) {
+router.put('/updateUser/:userId', function(req, res) {
     if (req.decoded && req.decoded.role === "super") {
         User.findById(req.params.userId, function(err, user) {
             if (err) {
@@ -90,13 +89,18 @@ router.post('/updateUser/:userId', function(req, res) {
                     success: false,
                     message: "Server failure. Please contact the administrator"
                 });
-            } else {
-                console.log(req.body);
+            } else if (req.body) {
+                var reqObject = req.body.user;
+                user.designation = reqObject.designation;
+                user.level = reqObject.level;
+                user.emailid = reqObject.emailid;
+                user.username = reqObject.username;
+                user.woffice = reqObject.woffice;
                 user.save(function(err) {
                     if (err) {
                         return res.json({
                             success: false,
-                            message: "Server failure. Please contact the administrator"
+                            message: err
                         });
                     } else {
                         return res.json({
@@ -111,6 +115,48 @@ router.post('/updateUser/:userId', function(req, res) {
         return res.redirect('/');
     }
 });
+
+router.post('/changePassword/:userId', function(req, res) {
+    console.log("dasd" + req.params.userId)
+    if (req.decoded && req.decoded.employeenumber == req.params.userId) {
+        User.findOne({ employeenumber: req.params.userId }, function(err, user) {
+            console.log(user)
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: "Server failure. Please contact the administrator"
+                });
+            } else if (req.body && user && user.comparePassword(req.body.oldP || "") &&
+                req.body.newP == req.body.confirmP) {
+                user.password = req.body.newP;
+                user.save(function(err) {
+                    if (err) {
+                        return res.json({
+                            success: false,
+                            message: err
+                        });
+                    } else {
+                        return res.json({
+                            success: true,
+                            message: "User details are updated"
+                        });
+                    }
+                })
+            } else {
+                return res.json({
+                    success: false,
+                    message: "Some thing wrong with the password details"
+                });
+            }
+        });
+    } else {
+        return res.json({
+            success: false,
+            message: "Server failure. Please contact the administrator"
+        });
+    }
+});
+
 router.post('/authenticate', function(req, res) {
     console.log(req.body.employeenumber);
     User.findOne({
@@ -119,10 +165,12 @@ router.post('/authenticate', function(req, res) {
         if (err) {
             return res.json({ success: false, message: err });
         } else {
+            console.log(user);
             if (!user) {
                 return res.json({ success: false, message: "User does not exist" });
             } else {
                 var isValidPassword = user.comparePassword(req.body.password || "");
+                console.log(isValidPassword + req.body.password);
                 if (!isValidPassword) {
                     return res.json({ success: false, message: "Could not authenticate password" });
                 } else {

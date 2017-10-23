@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('CommonDirectives', [])
+        .module('CommonDirectives', ['commonServices'])
         .directive("customSort", function() {
             return {
                 restrict: 'A',
@@ -77,7 +77,7 @@
             }
 
         })
-        .directive('nepalidatereadonly', function() {
+        .directive('nepalidatereadonly', function(DateObject) {
             return {
                 replace: true,
                 restrict: "E",
@@ -86,19 +86,15 @@
                 },
                 link: function(scope, el, attr, ngModel) {
                     attr.$observe('date', function(actual_value) {
-                        if (actual_value) {
-                            var localeDate = new Date(actual_value)
-                            $(el).text(AD2BS(localeDate.getFullYear() + "-" + (localeDate.getMonth() + 1) + "-" + localeDate.getDate()));
-                        }
+                        $(el).text(DateObject.ISOtoNepali(actual_value, ""));
                     })
-
                 },
 
                 template: "<span></span>"
             }
 
         })
-        .directive('nepalidatepicker', function() {
+        .directive('nepalidatepicker', function(DateObject) {
             return {
                 replace: true,
                 require: "ngModel",
@@ -115,17 +111,13 @@
                             npdYear: true,
                             onChange: function() {
                                 ctrl.$setViewValue(BS2AD(inputField.val()));
-                            },
-                            disableBefore: '01/01/2069'
+                            }
                         });
                     $("i", element).on("click", function() {
                         showNdpCalendarBox(inputField.attr("id"));
                     });
                     ctrl.$render = function() {
-                        if (ctrl.$modelValue) {
-                            var localeDate = new Date(ctrl.$modelValue)
-                            inputField.val(AD2BS(localeDate.getFullYear() + "-" + (localeDate.getMonth() + 1) + "-" + localeDate.getDate()));
-                        }
+                        inputField.val(DateObject.ISOtoNepali(ctrl.$modelValue, ""));
                     }
                 },
                 template: '<div class="datepicker"><input type="text"  class="form-control "><i class="ndp-click-trigger fa fa-calendar" aria-hidden="true" ngclick="opendatePicker"></i></div>'

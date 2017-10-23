@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('claimServices', [])
-        .factory('Claim', function($http) {
+        .module('claimServices', ['commonServices'])
+        .factory('Claim', function($http, DateObject) {
             var claimFactory = {};
             claimFactory.addClaim = function(data) {
                 return $http.post('/claims/addClaim', data);
@@ -17,11 +17,17 @@
             }
 
             claimFactory.updateClaim = function(claimid, claimData) {
-                return $http.post("/claims/updateClaim/" + claimid, claimData);
+                return $http.put("/claims/updateClaim/" + claimid, claimData);
             }
 
             claimFactory.print = function(claimData) {
-                return $http.post("/claims/print", claimData);
+                var claimDetails = angular.copy(claimData);
+                for (var i = 0, length = claimDetails.length; i < length; i++) {
+                    var claim = claimDetails[i];
+                    claim.claimdate = DateObject.ISOtoNepali(claim.claimdate, "");
+                    claim.dischargedate = DateObject.ISOtoNepali(claim.dischargedate, "");
+                }
+                return $http.post("/claims/print", claimDetails);
             }
 
             claimFactory.deleteClaim = function(userid) {

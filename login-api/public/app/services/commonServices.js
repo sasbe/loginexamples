@@ -38,6 +38,22 @@
             }
 
             return QueryObject;
+        }).factory('DateObject', function() {
+            var dateObject = {
+
+            }
+            dateObject.ISOtoNepali = function(isoValue, nullValue) {
+                if (isoValue) {
+                    var localeDate = new Date(isoValue)
+                    return AD2BS(localeDate.getFullYear() + "-" + (localeDate.getMonth() + 1) + "-" + localeDate.getDate());
+                }
+                if (nullValue != undefined) {
+                    return nullValue;
+                }
+                return isoValue;
+            }
+            return dateObject;
         })
+
 
 }());

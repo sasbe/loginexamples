@@ -33,6 +33,32 @@
                 Auth.facebook($routeParams.token);
                 $location.path('/');
             }
-        });
+        }).controller('changePassword', function($location, Auth, $timeout, User, $scope) {
+            var controllerScope = this;
+            controllerScope.userData = {
+                oldP: "",
+                newP: "",
+                confirmP: ""
+            };
+            console.log("change password loaded");
+            controllerScope.updatePassword = function() {
+                console.log($scope)
+                User.changePassword($scope.$parent.main.userDetails.employeenumber, controllerScope.userData).then(function(data) {
+                    $scope.$emit("appLoading", false);
+                    if (data.data.success) {
+                        $scope.$emit("successReceived", data.data.message + '......Redirecting');
+                        Auth.logOut();
+                        $timeout(function() {
+                            $location.url('/');
+                        }, 2000);
+                    } else {
+                        $scope.$emit("errorReceived", data.data.message);
+                    }
+                }, function(response) {
+                    $scope.$emit("errorReceived", response.statusText);
+                });
+            }
+
+        })
 
 }());
